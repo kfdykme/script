@@ -1,7 +1,7 @@
 const exec = require('child_process').exec
 
 const IS_DEBUG = false
-const TARGE_PROCESS_NAME = process.argv[2] + '.exe' 
+let TARGE_PROCESS_NAME = process.argv[2] + '.exe' 
 /**
  * 
  * @param {name, pid} processInfo 
@@ -46,8 +46,7 @@ const getProcessFromExe = (res) => {
     killProcess(res)
 }
 
-const windowService = (cmd) => {
-    console.info(cmd)
+const windowService = (cmd) => { 
 
     exec(cmd, {maxBuffer: 5000 * 1024}, (err, stdout, stderr) => {
         if (err) {
@@ -57,5 +56,14 @@ const windowService = (cmd) => {
         getProcessFromExe(stdout)
     })
 }
+ 
+const initArg = (opt) => {
+    TARGE_PROCESS_NAME = opt + '.exe'
+}
 
-windowService('tasklist')
+const handle = (opt) => {
+    windowService('tasklist')
+}
+
+exports.initArg = initArg
+exports.handle = handle

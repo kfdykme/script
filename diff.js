@@ -15,7 +15,7 @@ const text = fs.readFileSync(targetFile) + ''
 // console.info(text)
 const currentStart = '<<<<<<< HEAD'
 const middle = '======='
-const masterEnd = '>>>>>>> master'
+const masterEnd = '>>>>>>> origin/master'
 
 
 const hasOneDiff = (text) => {
@@ -93,5 +93,5 @@ exec('git add ' + targetFile, (error, stdout, stderr) => {
     }
     console.log(`stdout: ${stdout}`);
     console.error(`stderr: ${stderr}`);
-    fs.writeFileSync(targetFile, inCommingContent)
+    fs.writeFileSync(targetFile, inCommingContent.trim())
   });
